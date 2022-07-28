@@ -7,3 +7,6 @@ def remove_html_margins(path):
                 f.write(line.replace('<head>', '<head><style>body { margin: 0; }</style>'))
             else:
                 f.write(line)
+
+
+alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
