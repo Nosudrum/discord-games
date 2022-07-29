@@ -1,12 +1,10 @@
-from TLEpropagation import lat, lon, t
-import plotly.express as px
-from plotFunctions import remove_html_margins, alphabet
-import pandas as pd
-from get_grid import get_grid
-
-import matplotlib.pyplot as plt
-from matplotlib.image import imread
 import cartopy.crs as ccrs
+import matplotlib.pyplot as plt
+import pandas as pd
+from matplotlib.image import imread
+
+from TLEpropagation import lat, lon, t
+from get_grid import get_grid
 
 df = pd.DataFrame({"lat": lat.degrees, "lon": lon.degrees, "epoch": t.utc_datetime()})
 df["marker_size"] = 1
@@ -15,12 +13,6 @@ df["elapsed_hours"] = deltaT
 
 grid_lat, grid_lon, numbers_lon, numbers_lat, letters_lon, letters_lat, numbers, letters, latitudes, longitudes = \
     get_grid(df.lat.min(), df.lat.max(), 5, 20)
-# fig = px.line_geo(lat=grid_lat, lon=grid_lon, color_discrete_sequence=["white"])
-#
-# fig.update_layout(template="plotly_dark", hovermode=False)
-# fig.write_html('grid_only.html')
-# # fig.write_image('grid_only.png')
-# remove_html_margins('grid_only.html')
 
 fig = plt.figure(figsize=(10, 5), facecolor='black')
 ax = fig.add_subplot(1, 1, 1, projection=ccrs.Robinson())

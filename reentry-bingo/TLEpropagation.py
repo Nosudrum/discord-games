@@ -1,16 +1,15 @@
 import numpy as np
 from skyfield.api import EarthSatellite, load, wgs84
+import requests
 
-with open('TLE_test.txt', 'r') as f:
-    tle = f.read().split("\n")
-    f.close()
+URL = "https://celestrak.org/NORAD/elements/gp.php?INTDES=2022-085B&FORMAT=tle"
 
-tle = [x.strip() for x in tle]
+TLE = requests.get(URL).text.splitlines()
 
-sat = EarthSatellite(tle[1], tle[2], tle[0])
+sat = EarthSatellite(TLE[1], TLE[2], TLE[0].strip())
 
 ts = load.timescale()
-t = ts.tt_jd(np.arange(sat.epoch.tt, sat.epoch.tt + 3.0, 1/(24*60)))
+t = ts.tt_jd(np.arange(sat.epoch.tt, sat.epoch.tt + 3.0, 1 / 86400))
 
 # Compute geocentric positions for the satellite.
 
