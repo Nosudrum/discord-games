@@ -16,8 +16,8 @@ df["marker_size"] = 1
 deltaT = (df.epoch - df.epoch[0]).dt.total_seconds() / 3600
 df["elapsed_hours"] = deltaT
 
-window_mid = datetime(2022, 11, 5, 2, 21, 00, tzinfo=timezone.utc)
-window_half_range = timedelta(hours=16)
+window_mid = datetime(2022, 11, 5, 4, 51, 00, tzinfo=timezone.utc)
+window_half_range = timedelta(hours=14)
 
 df_before = df[(df.epoch < window_mid) & (df.epoch > window_mid - window_half_range)]
 df_after = df[(df.epoch > window_mid) & (df.epoch < window_mid + window_half_range)]
