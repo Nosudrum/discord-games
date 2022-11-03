@@ -13,7 +13,7 @@ plot_grid(ax)
 plot_heatmap(fig, ax)
 
 # Plot trajectory
-plot_trajectory(ax, impact_known=False)
+plot_trajectory(ax, up_to_impact=False)
 
 # Save figure
 finish_figure(fig, "plots/trajectory_heatmap.png", show=True)
