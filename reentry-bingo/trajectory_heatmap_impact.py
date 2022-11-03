@@ -8,8 +8,8 @@ import pandas as pd
 from matplotlib.colors import LinearSegmentedColormap
 from matplotlib.image import imread
 
-from TLEpropagation import lat, lon, t
-from get_grid import get_grid
+from trajectoryFunctions import lat, lon, t
+from gridFunctions import get_grid
 
 df = pd.DataFrame({"lat": lat.degrees, "lon": lon.degrees, "epoch": t.utc_datetime()})
 df["marker_size"] = 1
