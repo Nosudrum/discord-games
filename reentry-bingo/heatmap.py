@@ -12,4 +12,4 @@ plot_grid(ax)
 plot_heatmap(fig, ax)
 
 # Save figure
-finish_figure(fig, "heatmap.png", show=True)
+finish_figure(fig, "plots/heatmap.png", show=True)

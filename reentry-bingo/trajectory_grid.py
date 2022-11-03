@@ -12,4 +12,4 @@ plot_grid(ax)
 plot_trajectory(ax)
 
 # Save figure
-finish_figure(fig, "trajectory_grid.png", show=True)
+finish_figure(fig, "plots/trajectory_grid.png", show=True)

@@ -87,5 +87,5 @@ ax.plot(df_before.lon, df_before.lat, '.', color="blue", transform=ccrs.PlateCar
 ax.plot(impact_lon, impact_lat, '*', color="red", transform=ccrs.PlateCarree(), markersize=7)
 plt.tight_layout()
 
-fig.savefig('trajectory_heatmap_impact.png', facecolor="None", edgecolor='none', dpi=300)
+fig.savefig('plots/trajectory_heatmap_impact.png', facecolor="None", edgecolor='none', dpi=300)
 plt.show()

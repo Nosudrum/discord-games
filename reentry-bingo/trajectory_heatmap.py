@@ -16,4 +16,4 @@ plot_heatmap(fig, ax)
 plot_trajectory(ax)
 
 # Save figure
-finish_figure(fig, "trajectory_heatmap.png", show=True)
+finish_figure(fig, "plots/trajectory_heatmap.png", show=True)
