@@ -1,7 +1,7 @@
 import csv
 from datetime import datetime, timedelta
 
-with open('input_settings.csv', mode='r') as infile:
+with open('../input_settings.csv', mode='r') as infile:
     reader = csv.reader(infile)
     input_settings = {}
     for rows in reader:

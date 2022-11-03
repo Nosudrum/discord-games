@@ -1,5 +1,5 @@
-from gridFunctions import plot_grid
-from plotFunctions import start_earth_map, finish_figure
+from codeModules.gridFunctions import plot_grid
+from codeModules.plotFunctions import start_earth_map, finish_figure
 
 # Plot Earth map
 fig, ax = start_earth_map()

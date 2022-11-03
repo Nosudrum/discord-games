@@ -1,7 +1,7 @@
-from gridFunctions import plot_grid
-from heatmapFunctions import plot_heatmap
-from plotFunctions import start_earth_map, finish_figure
-from trajectoryFunctions import plot_trajectory
+from codeModules.gridFunctions import plot_grid
+from codeModules.heatmapFunctions import plot_heatmap
+from codeModules.plotFunctions import start_earth_map, finish_figure
+from codeModules.trajectoryFunctions import plot_trajectory
 
 # Plot Earth map
 fig, ax = start_earth_map()

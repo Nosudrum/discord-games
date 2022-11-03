@@ -6,7 +6,7 @@ import pandas as pd
 import requests
 from skyfield.api import EarthSatellite, load, wgs84
 
-from input_parser import window_mid, window_half_range, debris_international_designator, impact_lat, impact_lon
+from codeModules.inputParser import window_mid, window_half_range, debris_international_designator, impact_lat, impact_lon
 
 
 def get_propagation_duration(sat_epoch_utc_datetime):
@@ -26,8 +26,14 @@ URL = f"https://celestrak.org/NORAD/elements/gp.php?INTDES={debris_international
 TLE = requests.get(URL).text.splitlines()
 
 if TLE[0] == 'No GP data found':
-    print("ERROR : No TLE found. Stopping.")
-    exit()
+    print("WARNING : No online TLE found. Using local TLE file.")
+    with open('../TLE_backup.txt', mode='r') as infile:
+        TLE = infile.read().splitlines()
+else:
+    print("TLE found. Using online TLE and updating local file.")
+    with open('../TLE_backup.txt', 'w') as outfile:
+        for line in TLE:
+            outfile.write(f"{line}\n")
 
 sat = EarthSatellite(TLE[1], TLE[2], TLE[0].strip())
 

@@ -5,8 +5,8 @@ import numpy as np
 import pandas as pd
 from matplotlib.colors import LinearSegmentedColormap
 
-from gridFunctions import get_grid
-from input_parser import colormap
+from codeModules.gridFunctions import get_grid
+from codeModules.inputParser import colormap
 
 # MODIFY THIS SETUP TO MATCH YOUR DATA
 answers_path = "answers.csv"
