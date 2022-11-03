@@ -3,7 +3,7 @@
 This is a prediction game related to uncontrolled atmospheric re-entries of large rocket debris on Earth. It could easily be repurposed for any kind of map-based prediction game, by changing the map background and adjusting the grid generation parameters.
 
 <p float="left" align="center">
-<img src="grid_only.png" width="49%" />
+<img src="grid.png" width="49%" />
 <img src="trajectory_grid.png" width="49%" /> 
 </p>
 
