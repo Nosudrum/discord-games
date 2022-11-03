@@ -3,9 +3,8 @@ import matplotlib.cm as cm
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
-from matplotlib.cm import ScalarMappable
 from matplotlib.image import imread
-from matplotlib.colors import LinearSegmentedColormap, BoundaryNorm
+from matplotlib.colors import LinearSegmentedColormap
 
 # from TLEpropagation import lat, lon, t
 from get_grid import get_grid
@@ -31,12 +30,6 @@ answers["zone"] = answers["row"] + answers["column"].map(str)
 values = answers.zone.value_counts().values
 
 color_map = cm.get_cmap('Oranges')
-cmaplist = np.array([color_map(i) for i in range(color_map.N)])
-cmaplist[:, -1] = 0.5
-
-cmap = LinearSegmentedColormap.from_list(
-    'Custom cmap', cmaplist.tolist(), color_map.N)
-bounds = np.linspace(0, values.max() + 1, values.max() + 2)
 
 fig = plt.figure(figsize=(10, 5), facecolor='black')
 ax = fig.add_subplot(1, 1, 1, projection=ccrs.Robinson())
@@ -58,24 +51,28 @@ for row in enumerate(letters):
         zone = letter + str(number)
         value = (answers["zone"] == zone).sum()
         value_normalized = value / (values.max())
-        color = cmap(value_normalized)
+        color = color_map(value_normalized)
         latitudes_bounds = latitudes[row[0]:row[0] + 2]
         longitudes_bounds = longitudes[column[0]:column[0] + 2]
         latitudes_zone = [latitudes_bounds.min(), latitudes_bounds.max(), latitudes_bounds.max(),
                           latitudes_bounds.min()]
         longitudes_zone = [longitudes_bounds.min(), longitudes_bounds.min(), longitudes_bounds.max(),
                            longitudes_bounds.max()]
-        ax.fill(longitudes_zone, latitudes_zone, color=color, transform=ccrs.PlateCarree())
-sm = ScalarMappable(cmap=cmap, norm=plt.Normalize(vmin=0, vmax=values.max()))
+        ax.fill(longitudes_zone, latitudes_zone, color=color, transform=ccrs.PlateCarree(), alpha=0.5)
 
+# Setup colorbar
+cmaplist = np.array([color_map(i) for i in range(color_map.N)])
+cmaplist[:, -1] = 0.5
+cmap = LinearSegmentedColormap.from_list(
+    'Custom cmap', cmaplist.tolist(), color_map.N)
+bounds = np.linspace(0, values.max() + 1, values.max() + 2)
+sm = cm.ScalarMappable(cmap=cmap, norm=plt.Normalize(vmin=0, vmax=values.max()))
 sm.set_array([])
 cax = ax.inset_axes([0.15, 0.17, 0.7, 0.035])
 cbar = fig.colorbar(sm, orientation="horizontal", cax=cax, boundaries=bounds, ticks=np.arange(0.5, values.max() + 1.5))
 cbar.ax.set_xticklabels(np.arange(0, values.max() + 1))
 cbar.ax.set_facecolor('none')
-
 cbar.ax.tick_params(length=0)
-# cbar.ax.xaxis.set_tick_params(color='white')
 cbar.outline.set_edgecolor('white')
 plt.setp(plt.getp(cbar.ax, 'xticklabels'), color='white', fontsize=12)
 
