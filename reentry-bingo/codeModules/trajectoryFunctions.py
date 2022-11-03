@@ -1,4 +1,4 @@
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 
 import cartopy.crs as ccrs
 import numpy as np
@@ -6,7 +6,8 @@ import pandas as pd
 import requests
 from skyfield.api import EarthSatellite, load, wgs84
 
-from codeModules.inputParser import window_mid, window_half_range, debris_international_designator, impact_lat, impact_lon
+from codeModules.inputParser import window_mid, window_half_range, debris_international_designator, impact_lat, \
+    impact_lon
 
 
 def get_propagation_duration(sat_epoch_utc_datetime):
@@ -49,23 +50,56 @@ trajectory["marker_size"] = 1
 deltaT = (trajectory.epoch - trajectory.epoch[0]).dt.total_seconds() / 3600
 trajectory["elapsed_hours"] = deltaT
 
-trajectory_before = trajectory[
-    (trajectory.epoch < window_mid) & (trajectory.epoch > window_mid - window_half_range)]
+if impact_lon is not None:
+    trajectory_before = trajectory[
+        (trajectory.lon < impact_lon) & (trajectory.epoch > (window_mid - window_half_range)) & (
+                trajectory.epoch < window_mid + timedelta(minutes=5))]
+else:
+    trajectory_before = trajectory[
+        (trajectory.epoch < window_mid) & (trajectory.epoch > window_mid - window_half_range)]
 trajectory_after = trajectory[(trajectory.epoch > window_mid) & (trajectory.epoch < window_mid + window_half_range)]
 
 
-def get_impact_point():
+def is_impact_known():
     if impact_lat is None or impact_lon is None:
+        return False
+    else:
+        return True
+
+
+def get_impact_point():
+    if is_impact_known():
+        return impact_lat, impact_lon
+    else:
         impact_lon_estimated = (trajectory_before.tail(1).lon.values[0] + trajectory_after.head(1).lon.values[0]) / 2
         impact_lat_estimated = (trajectory_before.tail(1).lat.values[0] + trajectory_after.head(1).lat.values[0]) / 2
         return impact_lat_estimated, impact_lon_estimated
-    else:
-        return impact_lat, impact_lon
 
 
-def plot_trajectory(ax):
+def plot_window_trajectory(ax):
     impact_lat_plot, impact_lon_plot = get_impact_point()
     ax.plot(trajectory_before.lon, trajectory_before.lat, '.', color="blue", transform=ccrs.PlateCarree(),
             markersize=0.5)
-    ax.plot(trajectory_after.lon, trajectory_after.lat, '.', color="red", transform=ccrs.PlateCarree(), markersize=0.5)
+    ax.plot(trajectory_after.lon, trajectory_after.lat, '.', color="red", transform=ccrs.PlateCarree(),
+            markersize=0.5)
     ax.plot(impact_lon_plot, impact_lat_plot, 'o', color="orange", transform=ccrs.PlateCarree(), markersize=7)
+
+
+def plot_impact_trajectory(ax):
+    impact_lat_plot, impact_lon_plot = get_impact_point()
+    ax.plot(trajectory_before.lon, trajectory_before.lat, '.', color="blue", transform=ccrs.PlateCarree(),
+            markersize=0.5)
+    ax.plot(impact_lon_plot, impact_lat_plot, '*', color="red", transform=ccrs.PlateCarree(), markersize=7)
+
+
+def plot_trajectory(ax, up_to_impact=None):
+    if up_to_impact is None:
+        if is_impact_known():
+            plot_impact_trajectory(ax)
+        else:
+            plot_window_trajectory(ax)
+    else:
+        if up_to_impact:
+            plot_impact_trajectory(ax)
+        else:
+            plot_window_trajectory(ax)
