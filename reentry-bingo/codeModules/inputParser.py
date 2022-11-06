@@ -8,7 +8,7 @@ with open('input_settings.csv', mode='r') as infile:
         data = rows[1]
         if data == 'None':
             data = None
-        elif rows[0] == 'window_mid':
+        elif rows[0] == 'window_mid' or rows[0] == 'impact_time':
             data = datetime.strptime(data, "%Y-%m-%dT%H:%M:%S%z")
         elif rows[0] == 'window_half_range':
             data = datetime.strptime(data, "%H:%M:%S")
@@ -31,3 +31,4 @@ window_mid = input_settings['window_mid']
 window_half_range = input_settings['window_half_range']
 impact_lat = input_settings['impact_lat']
 impact_lon = input_settings['impact_lon']
+impact_time = input_settings['impact_time']

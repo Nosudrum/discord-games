@@ -6,7 +6,8 @@ colormap,Oranges
 nb_rows,5
 nb_columns,20
 debris_international_designator,2022-143B
-window_mid,2022-11-04T11:20:00Z
-window_half_range,03:00:00
+window_mid,2022-11-04T10:01:00Z
+window_half_range,00:31:00
 impact_lat,None
 impact_lon,None
+impact_time,2022-11-04T10:01:00Z
