@@ -9,6 +9,6 @@ This repository contains the code of the games and activities I created for Disc
 
 ## [Landing bingo](https://github.com/Nosudrum/discord-games/tree/main/landing-bingo)
 <p float="left" align="center">
-<img src="landing-bingo/grid.png" width="49%" />
-<img src="landing-bingo/heatmap.png" width="49%" /> 
+<img src="landing-bingo/grid.png" width="55%" />
+<img src="landing-bingo/heatmap.png" width="43%" /> 
 </p>
