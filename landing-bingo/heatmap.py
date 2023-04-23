@@ -72,4 +72,5 @@ plt.setp(plt.getp(cbar.ax, 'xticklabels'), color='white', fontsize=50,)
 
 
 plt.savefig("heatmap.png", facecolor="None")
+plt.savefig("heatmap_black.png")
 plt.show()
