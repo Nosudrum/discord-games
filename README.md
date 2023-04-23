@@ -6,3 +6,9 @@ This repository contains the code of the games and activities I created for Disc
 <img src="reentry-bingo/plots/trajectory_heatmap.png" width="49%" />
 <img src="reentry-bingo/plots/trajectory_heatmap_impact.png" width="49%" /> 
 </p>
+
+## [Landing bingo](https://github.com/Nosudrum/discord-games/tree/main/landing-bingo)
+<p float="left" align="center">
+<img src="landing-bingo/grid.png" width="49%" />
+<img src="reentry-bingo/heatmap.png" width="49%" /> 
+</p>

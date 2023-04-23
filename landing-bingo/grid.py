@@ -6,7 +6,7 @@ from matplotlib.patches import Circle
 img = Image.open("crater.png")
 alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
-fig, ax = plt.subplots(figsize=(img.size[0] / 100, img.size[1] / 100))
+fig, ax = plt.subplots(figsize=(img.size[0] / 100, img.size[1] / 100), facecolor="black")
 fig.subplots_adjust(left=0, bottom=0, right=1, top=1)
 plt.imshow(img, cmap="gray", interpolation="none")
 
@@ -25,9 +25,15 @@ radii = radii[1:]
 center_circle_area = np.pi * radii[0] ** 2
 previous_circle_area = center_circle_area
 
+zone_angles_list = []
+number_of_zones_list = []
 for ii, radius in enumerate(radii):
     circle = Circle(
-        center_coords, radius=radius, edgecolor="white", facecolor="none", linewidth=5
+        center_coords,
+        radius=radius,
+        edgecolor="white",
+        facecolor="none",
+        linewidth=5,
     )
     ax.add_patch(circle)
     if ii == 0:
@@ -45,6 +51,7 @@ for ii, radius in enumerate(radii):
     circle_area = np.pi * radius**2
     segment_area = circle_area - previous_circle_area
     number_of_zones = np.ceil(segment_area / center_circle_area)
+    number_of_zones_list.append(number_of_zones)
     zone_angles = np.linspace(0, 2 * np.pi, int(number_of_zones), endpoint=False)
     if number_of_zones % 2 == 0:
         zone_angles += np.pi
@@ -52,6 +59,7 @@ for ii, radius in enumerate(radii):
         zone_angles += np.pi / 2
     else:
         zone_angles -= np.pi / 2
+    zone_angles_list.append(zone_angles)
     text_angles = zone_angles + np.pi / number_of_zones
     for angle in zone_angles:
         x_range = [
@@ -78,5 +86,4 @@ for ii, radius in enumerate(radii):
         )
     previous_circle_area = circle_area
 
-plt.savefig("grid.png")
-plt.show()
+plt.savefig("grid.png", facecolor="None")
