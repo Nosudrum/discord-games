@@ -8,4 +8,4 @@ fig, ax = start_earth_map()
 plot_grid(ax)
 
 # Save figure
-finish_figure(fig, "plots/grid.png", show=True)
+finish_figure(fig, "plots/grid.png", show=False)
