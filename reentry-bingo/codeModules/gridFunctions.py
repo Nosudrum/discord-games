@@ -54,7 +54,7 @@ def get_grid():
             else:
                 points_lat += grid_lat[::-1, column].tolist()
 
-    numbers_lon = (longitudes[1:] + longitudes[:-1]) / 2 - 4
+    numbers_lon = (longitudes[1:] + longitudes[:-1]) / 2 - 8
     numbers_lat = (max(latitudes) + 2) * np.ones(len(numbers_lon))
     letters_lat = (latitudes[1:] + latitudes[:-1]) / 2 - 2
     letters_lon = (min(longitudes) + 9) * np.ones(len(letters_lat)) - 2

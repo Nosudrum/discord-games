@@ -44,7 +44,7 @@ def plot_heatmap(fig, ax):
     bounds = np.linspace(0, values.max() + 1, values.max() + 2)
     sm = cm.ScalarMappable(cmap=custom_map, norm=plt.Normalize(vmin=0, vmax=values.max()))
     sm.set_array([])
-    cax = ax.inset_axes([0.15, 0.17, 0.7, 0.035])
+    cax = ax.inset_axes([0.15, -0.05, 0.7, 0.035])
     cbar = fig.colorbar(sm, orientation="horizontal", cax=cax, boundaries=bounds,
                         ticks=np.arange(0.5, values.max() + 1.5))
     cbar.ax.set_xticklabels(np.arange(0, values.max() + 1))
