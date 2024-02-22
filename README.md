@@ -3,8 +3,8 @@ This repository contains the code of the games and activities I created for Disc
 
 ## [Re-entry bingo](https://github.com/Nosudrum/discord-games/tree/main/reentry-bingo)
 <p float="left" align="center">
-<img src="reentry-bingo/plots/trajectory_heatmap.png" width="49%" />
-<img src="reentry-bingo/plots/trajectory_heatmap_impact.png" width="49%" /> 
+<img src="reentry-bingo/plots/2022-143B_trajectory_grid.png" width="49%" />
+<img src="reentry-bingo/plots/2022-143B_trajectory_heatmap_impact.png" width="49%" /> 
 </p>
 
 ## [Landing bingo](https://github.com/Nosudrum/discord-games/tree/main/landing-bingo)

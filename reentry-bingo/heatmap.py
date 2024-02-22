@@ -1,4 +1,4 @@
-from codeModules.gridFunctions import plot_grid
+from codeModules.gridFunctions import plot_grid, debris_international_designator
 from codeModules.heatmapFunctions import plot_heatmap
 from codeModules.plotFunctions import start_earth_map, finish_figure
 
@@ -12,4 +12,4 @@ plot_grid(ax)
 plot_heatmap(fig, ax)
 
 # Save figure
-finish_figure(fig, "plots/heatmap.png", show=True)
+finish_figure(fig, f"plots/{debris_international_designator}_heatmap.png", show=False)

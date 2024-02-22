@@ -1,7 +1,8 @@
 import cartopy.crs as ccrs
 import numpy as np
 
-from codeModules.inputParser import grid_lat_min, grid_lat_max, grid_lon_min, grid_lon_max, nb_rows, nb_columns
+from codeModules.inputParser import grid_lat_min, grid_lat_max, grid_lon_min, grid_lon_max, nb_rows, nb_columns, \
+    debris_international_designator
 from codeModules.trajectoryFunctions import trajectory
 
 # It is recommended to set a fixed latitude range for the grid, to avoid the grid changing when the window shrinks.

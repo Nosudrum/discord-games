@@ -1,5 +1,6 @@
 from datetime import timedelta
 
+import warnings
 import cartopy.crs as ccrs
 import numpy as np
 import pandas as pd
@@ -40,17 +41,18 @@ def get_propagation_duration(sat_epoch_utc_datetime):
 
 URL = f"https://celestrak.org/NORAD/elements/gp.php?INTDES={debris_international_designator}&FORMAT=tle"
 
-TLE = requests.get(URL).text.splitlines()
-
-if TLE[0] == 'No GP data found':
-    print("WARNING : No online TLE found. Using local TLE file.")
-    with open('../TLE_backup.txt', mode='r') as infile:
-        TLE = infile.read().splitlines()
-else:
+try:
+    TLE = requests.get(URL).text.splitlines()
+    if TLE[0] == 'No GP data found':
+        raise ValueError
     print("TLE found. Using online TLE and updating local file.")
     with open('../TLE_backup.txt', 'w') as outfile:
         for line in TLE:
             outfile.write(f"{line}\n")
+except requests.exceptions.ConnectTimeout or ValueError:
+    print("WARNING : No online TLE found. Using local TLE file.")
+    with open('../TLE_backup.txt', mode='r') as infile:
+        TLE = infile.read().splitlines()
 
 sat = EarthSatellite(TLE[1], TLE[2], TLE[0].strip())
 
@@ -66,9 +68,10 @@ trajectory["marker_size"] = 1
 deltaT = (trajectory.epoch - trajectory.epoch[0]).dt.total_seconds() / 3600
 trajectory["elapsed_hours"] = deltaT
 
+
 if impact_lon is not None:
     trajectory_before = trajectory[
-        (trajectory.lon < impact_lon) & (trajectory.epoch > (window_mid - window_half_range)) & (
+         (trajectory.epoch > (window_mid - window_half_range)) & (
                 trajectory.epoch < window_mid + timedelta(minutes=5))]
 else:
     trajectory_before = trajectory[
@@ -113,8 +116,9 @@ def plot_window_trajectory(ax):
 
 def plot_impact_trajectory(ax):
     impact_lat_plot, impact_lon_plot = get_impact_point()
-    trajectory_before_impact = trajectory[(trajectory.epoch > (window_mid - timedelta(hours=1.5))) & (
-                trajectory.epoch < window_mid)]
+    end_time = window_mid if impact_time is None else impact_time
+    trajectory_before_impact = trajectory[(trajectory.epoch > (end_time - timedelta(hours=1.5))) & (
+                trajectory.epoch < end_time)]
     ax.plot(trajectory_before_impact.lon, trajectory_before_impact.lat, '.', color="blue", transform=ccrs.PlateCarree(),
             markersize=0.5)
     ax.plot(impact_lon_plot, impact_lat_plot, '*', color="red", transform=ccrs.PlateCarree(), markersize=7)
