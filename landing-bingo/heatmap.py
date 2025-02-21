@@ -1,9 +1,8 @@
-import matplotlib.pyplot as plt
+import matplotlib.cm as cm
+import pandas as pd
 from matplotlib.colors import LinearSegmentedColormap
 
 from grid import *
-import matplotlib.cm as cm
-import pandas as pd
 
 answers = pd.read_csv("answers.csv")
 answers = pd.DataFrame([answers.iloc[:, 2], answers.iloc[:, 3]]).T
@@ -17,16 +16,17 @@ for ii, radius in enumerate(radii):
     if ii == 0:
         value = (answers["segment"] == "A").sum()
         print(f"A: {value}")
-        value_normalized = value / (values.max())
-        color = color_map(value_normalized)
-        circle = Circle(
-            center_coords,
-            radius=radius,
-            edgecolor="none",
-            facecolor=color,
-            alpha=0.5,
-        )
-        ax.add_patch(circle)
+        if value > 0:
+            value_normalized = value / (values.max())
+            color = color_map(value_normalized)
+            circle = Circle(
+                center_coords,
+                radius=radius,
+                edgecolor="none",
+                facecolor=color,
+                alpha=0.5,
+            )
+            ax.add_patch(circle)
         continue
     zone_angles = zone_angles_list[ii - 1]
     zone_angles = np.append(zone_angles, zone_angles[0] + 2 * np.pi)  # close the loop
@@ -48,8 +48,8 @@ for ii, radius in enumerate(radii):
         if value > 0:
             ax.fill(x_range, y_range, color=color, alpha=0.5, zorder=0)
 
-fig.set_size_inches(img.size[0] / 100, img.size[1] / 100 + 2.7)
-fig.subplots_adjust(top=1, bottom=1 - img.size[1] / 100 / (img.size[1] / 100 + 2.7), left=0, right=1)
+fig.set_size_inches(img.size[0] / 100, img.size[1] / 90)
+fig.subplots_adjust(top=1, bottom=1 - img.size[1] / 100 / (img.size[1] / 90), left=0, right=1)
 
 # Setup colorbar
 color_map_list = np.array([color_map(i) for i in range(color_map.N)])
@@ -73,4 +73,3 @@ plt.setp(plt.getp(cbar.ax, 'xticklabels'), color='white', fontsize=50,)
 
 plt.savefig("heatmap.png", facecolor="None")
 plt.savefig("heatmap_black.png")
-plt.show()

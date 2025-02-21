@@ -3,7 +3,7 @@ import numpy as np
 from PIL import Image
 from matplotlib.patches import Circle
 
-img = Image.open("crater.png")
+img = Image.open("target.jpg")
 alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 fig, ax = plt.subplots(figsize=(img.size[0] / 100, img.size[1] / 100), facecolor="black")
@@ -17,7 +17,7 @@ ax.set_axis_off()
 center_x = img.size[0] / 2
 center_y = img.size[1] / 2
 center_coords = (center_x, center_y)
-max_radius = img.size[1] / 2
+max_radius = min(img.size[0], img.size[1]) / 2
 
 radii = np.linspace(0, max_radius, 7)
 radii = radii[1:]
