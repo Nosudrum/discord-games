@@ -3,7 +3,7 @@ import numpy as np
 from PIL import Image
 from matplotlib.patches import Circle
 
-img = Image.open("target.jpg")
+img = Image.open("target.png")
 alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 fig, ax = plt.subplots(figsize=(img.size[0] / 100, img.size[1] / 100), facecolor="black")
