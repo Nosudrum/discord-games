@@ -56,3 +56,11 @@ the grid generation parameters.
 <img src="landing-bingo/examples/blueghost_m1_heatmap.png" width="27%" />
 <img src="landing-bingo/examples/blueghost_m1_landingsite.gif" width="30.6%" /> 
 </p>
+
+### Nova-C IM-2 (Intuitive Machines)
+
+<p float="left" align="center">
+<img src="landing-bingo/examples/im2_grid.png" width="30%" />
+<img src="landing-bingo/examples/im2_heatmap.png" width="27%" />
+<img src="landing-bingo/examples/im2_landingsite.gif" width="30.6%" /> 
+</p>
