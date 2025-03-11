@@ -48,8 +48,8 @@ for ii, radius in enumerate(radii):
         if value > 0:
             ax.fill(x_range, y_range, color=color, alpha=0.5, zorder=0)
 
-fig.set_size_inches(img.size[0] / 100, img.size[1] / 90)
-fig.subplots_adjust(top=1, bottom=1 - img.size[1] / 100 / (img.size[1] / 90), left=0, right=1)
+fig.set_size_inches(img.size[0] / 100, img.size[1] / 88)
+fig.subplots_adjust(top=1, bottom=1 - img.size[1] / 100 / (img.size[1] / 88), left=0, right=1)
 
 # Setup colorbar
 color_map_list = np.array([color_map(i) for i in range(color_map.N)])
