@@ -35,6 +35,13 @@ downloaded [here](https://www.naturalearthdata.com/http//www.naturalearthdata.co
 <img src="reentry-bingo/plots/1995-021A_trajectory_heatmap_impact.png" width="49%" /> 
 </p>
 
+### 1972-023E (Kosmos 482)
+
+<p float="left" align="center">
+<img src="reentry-bingo/plots/1972-023E_grid.png" width="49%" />
+<img src="reentry-bingo/plots/1972-023E_trajectory_grid.png" width="49%" /> 
+</p>
+
 ## [Landing bingo](https://github.com/Nosudrum/discord-games/tree/main/landing-bingo)
 
 This is a prediction game related to an autonomous landing in a target area.
