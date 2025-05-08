@@ -42,6 +42,10 @@ downloaded [here](https://www.naturalearthdata.com/http//www.naturalearthdata.co
 <img src="reentry-bingo/plots/1972-023E_trajectory_grid.png" width="49%" /> 
 </p>
 
+<p float="left" align="center">
+<img src="reentry-bingo/plots/1972-023E_trajectory_heatmap.png" width="49%" />
+</p>
+
 ## [Landing bingo](https://github.com/Nosudrum/discord-games/tree/main/landing-bingo)
 
 This is a prediction game related to an autonomous landing in a target area.
