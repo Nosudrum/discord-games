@@ -1,6 +1,8 @@
 from datetime import timedelta
 
 import warnings
+from linecache import cache
+
 import cartopy.crs as ccrs
 import numpy as np
 import pandas as pd
@@ -39,19 +41,19 @@ def get_propagation_duration(sat_epoch_utc_datetime):
         return propagation_duration_days
 
 
-URL = f"https://celestrak.org/NORAD/elements/gp.php?INTDES={debris_international_designator}&FORMAT=tle"
+URL = f"https://celestrak.org/NORAD/elements/gp.php?INTDES={debris_international_designator}&FORMAT=TLE"
 
 try:
     TLE = requests.get(URL).text.splitlines()
     if TLE[0] == 'No GP data found':
         raise ValueError
     print("TLE found. Using online TLE and updating local file.")
-    with open('../TLE_backup.txt', 'w') as outfile:
+    with open('TLE_backup.txt', 'w') as outfile:
         for line in TLE:
             outfile.write(f"{line}\n")
-except requests.exceptions.ConnectTimeout or ValueError:
+except (requests.exceptions.ConnectTimeout, ValueError):
     print("WARNING : No online TLE found. Using local TLE file.")
-    with open('../TLE_backup.txt', mode='r') as infile:
+    with open('TLE_backup.txt', mode='r') as infile:
         TLE = infile.read().splitlines()
 
 sat = EarthSatellite(TLE[1], TLE[2], TLE[0].strip())

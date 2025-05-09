@@ -6,8 +6,8 @@ colormap,Oranges
 nb_rows,5
 nb_columns,20
 debris_international_designator,1972-023E
-window_mid,2025-05-10T07:34:00Z
-window_half_range,14:00:00
+window_mid,2025-05-10T06:30:00Z
+window_half_range,04:06:00
 impact_lat,None
 impact_lon,None
 impact_time,None
