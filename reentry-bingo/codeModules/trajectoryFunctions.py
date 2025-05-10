@@ -41,7 +41,7 @@ def get_propagation_duration(sat_epoch_utc_datetime):
         return propagation_duration_days
 
 
-URL = f"https://celestrak.org/NORAD/elements/gp.php?INTDES={debris_international_designator}&FORMAT=TLE"
+URL = f"https://celestrak.org/NORAD/elements/gp-last.php?INTDES={debris_international_designator}&FORMAT=TLE"
 
 try:
     TLE = requests.get(URL).text.splitlines()
